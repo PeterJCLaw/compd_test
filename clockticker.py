@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 
 import redis
 from time import sleep, time
