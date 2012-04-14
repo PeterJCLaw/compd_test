@@ -9,7 +9,14 @@ matches = ["{'time':3600,'teams': ['PSC','MFG','BSG','QMC'], 'delay': 1}"]
 actor = redis.Redis(host='localhost',port=6379,db=0)
 
 for i in range(20):
-	obj = {'time': (3600 + (7*60*(i+1))),'teams':[choice(teams),choice(teams),choice(teams),choice(teams)],'delay':3}
+	teams_chosen = []
+	teams_available = teams[:]
+	for i in xrange(0, 4):
+		c = choice(teams_available)
+		teams_available.remove(c)
+		teams_chosen.append(c)
+
+	obj = {'time': (3600 + (7*60*(i+1))),'teams':teams_chosen,'delay':3}
 	str = json.dumps(obj)
 	matches.append(str)
 
